@@ -5,7 +5,6 @@
 #include "time_sync.h"
 #include "data_submission.h"
 #include "Email.h"
-//#include "sms_alert.h"
 
 bool virtual_sensor = false;
 float temperature;
@@ -33,9 +32,6 @@ void setup() {
     return;
   }
 
-  sendMail(htmlContent);
-  //sendSMS(F("Test message from Arduino."));
-
   submitTimer = millis();
 
   esp_client.setCACert(ca_cert);
@@ -58,94 +54,30 @@ void loop() {
     generateVirtualSensorData(temperature, humidity);
   }
 
-  //File file=open_file();
-
   CarbonMonoxide=analogRead(34);
   CarbonMonoxide=(CarbonMonoxide*100)/4095.0;
   CarbonDioxide=analogRead(35);
   CarbonDioxide=(CarbonDioxide*100)/4095.0;
 
   anedya_submitData(F("temperature"), temperature);
-  Serial.print(F("Temperature : "));
-  Serial.println(temperature);
-  // String temp=temp_alert(temperature);
-  // write_file(file,temp);
+  if((temperature>-11&&temperature<0)||(temperature>39&&temperature<50)){
+    sendMail(htmlContent);
+  }
 
   anedya_submitData(F("humidity"), humidity);
-  Serial.print(F("Humidity : "));
-  Serial.println(humidity);
-  // String humi=humi_alert(humidity);
-  // write_file(file,humi);
+  if(humidity<25||humidity>70){
+    sendMail(htmlContent);
+  }
 
   anedya_submitData(F("CarbonMonoxide"), CarbonMonoxide);
-  Serial.print(F("Carbon Monoxide : "));
-  Serial.println(CarbonMonoxide);
+  if(CarbonMonoxide>35){
+    sendMail(htmlContent);
+  }
 
   anedya_submitData(F("CarbonDioxide"), CarbonDioxide);
-  Serial.print(F("Carbon Dioxide : "));
-  Serial.println(CarbonDioxide);
+  if(CarbonDioxide>1000){
+    sendMail(htmlContent);
+  }
 
-  if(CarbonMonoxide<500){
-    digitalWrite(2,HIGH);
-    delay(500);
-    digitalWrite(2,LOW);
-  }
-  if(CarbonDioxide<500){
-    digitalWrite(4,HIGH);
-    delay(500);
-    digitalWrite(4,LOW);
-  }
   delay(5000);
 }
-
-String temp_alert(float temp){
-  if(temp<-10){
-    return "Extream Cold Temperature\n";
-  }
-  else if(temp>-11&&temp<0){
-    return "Very Cold Temperature\n";
-  }
-  else if(temp>-1&&temp<11){
-    return "Cold Temperature\n";
-  }
-  else if(temp>10&&temp<21){
-    return "Cool Temperature\n";
-  }
-  else if(temp>20&&temp<31){
-    return "Brisk Temperature\n";
-  }
-  else if(temp>30&&temp<35){
-    return "Warm Temperature\n";
-  }
-  else if(temp>34&&temp<40){
-    return "Hot Temperature\n";
-  }
-  else if(temp>39&&temp<50){
-    return "Very Hot Temperature\n";
-  }
-  else{
-    return "Extremly Hot Temperature\n";
-  }
-}
-
-String humi_alert(float humi){
-  if(humi<25){
-    return "Poor Low HUmidity Levels\n";
-  }
-  else if(humi>=25&&humi<30){
-    return "Fair Humidity Levels\n";
-  }
-  else if(humi>=30&&humi<60){
-    return "Maintain Your Healty Levels\n";
-  }
-  else if(humi>=60&&humi<70){
-    return "Fair Humidity Levels\n";
-  }
-  else{
-    return "Poor High HUmidity Levels\n";
-  }
-}
-
-// String CO_alert(float CO){
-  
-// }
