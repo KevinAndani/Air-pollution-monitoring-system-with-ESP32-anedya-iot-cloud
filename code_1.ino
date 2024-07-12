@@ -13,6 +13,7 @@ float CarbonMonoxide;
 float CarbonDioxide;
 long long submitTimer;
 String timeRes, submitRes;
+String htmlContent;
 
 void setup() {
   Serial.begin(115200);
@@ -26,7 +27,7 @@ void setup() {
   configMailClient();
 
   // Read HTML template
-  String htmlContent = readHTMLTemplate();
+  htmlContent = readHTMLTemplate();
   if (htmlContent.isEmpty()) {
     Serial.println(F("HTML content is empty"));
     return;

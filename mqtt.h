@@ -5,8 +5,6 @@
 #include <PubSubClient.h>
 
 extern String regionCode;
-extern const char *deviceID;
-extern const char *connectionkey;
 
 extern const char *mqtt_broker;
 extern const char *mqtt_username;

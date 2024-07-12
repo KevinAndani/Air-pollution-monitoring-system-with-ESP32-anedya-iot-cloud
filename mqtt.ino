@@ -1,8 +1,7 @@
 #include "mqtt.h"
+#include "anedya.h"
 
 String regionCode = "ap-in-1";
-const char *deviceID = "4329aac2-2506-11ef-84ba-139754672fc5";
-const char *connectionkey = "4dde07bbbf28aa68887393aa896a17df";
 
 const char *mqtt_broker = "mqtt.ap-in-1.anedya.io";
 const char *mqtt_username = deviceID;

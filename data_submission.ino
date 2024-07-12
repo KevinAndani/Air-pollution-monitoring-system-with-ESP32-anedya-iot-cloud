@@ -1,6 +1,8 @@
 // Function to submit data to Anedya server
 // For more info, visit [https://docs.anedya.io/devicehttpapi/submitdata/]
 #include "data_submission.h"
+#include "anedya.h"
+
 void anedya_submitData(String datapoint, float sensor_data){
   boolean check = true;
 
