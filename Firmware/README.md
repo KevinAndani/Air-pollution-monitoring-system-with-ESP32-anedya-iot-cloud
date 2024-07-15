@@ -25,7 +25,7 @@ This guide will walk you through setting up the Arduino IDE for our project, inc
 ## Step 2: Installing Required Libraries
 Open the Arduino IDE and follow these steps to install the necessary libraries:
 
-> [!NOTE] Install ESP32 Board
+> [!NOTE]
 > If you don't have installed ESP32 Board then download it by following steps:
 [Installing ESP32](https://randomnerdtutorials.com/installing-the-esp32-board-in-arduino-ide-windows-instructions/#:~:text=Installing%20ESP32%20Add%2Don%20in%20Arduino%20IDE)
 
@@ -43,7 +43,8 @@ Open the Arduino IDE and follow these steps to install the necessary libraries:
 ## Step 3: Configuring Variables
 Before uploading the code to your board, you need to replace certain variables with your specific details. Open the main sketch file (`.ino` file) and locate the following variables:
 
-> [!Attention]+  make the `anedya.h` file in the Firmware folder
+> [!caution] 
+> make the `anedya.h` file in the Firmware folder before compiling code
 > `#ifndef ANEDYA_H`
 > `#define ANEDYA_H`
 > `extern const char *deviceID = "Your_deviceID";`
