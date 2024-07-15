@@ -5,12 +5,16 @@ import requests
 import pandas as pd
 import os
 import pytz  # Add this import for time zone conversion
+from dotenv import load_dotenv
+import os
 
-from utils.global_vars import nodeId, apiKey
 
+# Load environment variables from .env file
+load_dotenv()
+nodeId = os.getenve("NODE_ID")
+apiKey = os.getenve("API_KEY")
 
 def anedya_config(NODE_ID:str, API_KEY:str) -> None :
-    global nodeId, apiKey
     nodeId = NODE_ID
     apiKey = API_KEY
     return None

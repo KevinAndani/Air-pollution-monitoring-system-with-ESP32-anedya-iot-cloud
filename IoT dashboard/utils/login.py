@@ -1,11 +1,16 @@
 # utils/login.py
 import streamlit as st
 import time as ts
+from dotenv import load_dotenv
+import os
 
-from utils.global_vars import username, password
+
+# Load environment variables from .env file
+load_dotenv()
+username = os.getenv("USERNAME")
+password = os.getenv("PASSWORD")
 
 def drawLogin():
-    global username, password
     titlecol = st.columns([1, 0.8, 1], gap='small')
     with titlecol[1]:
         st.title("Anedya Dashboard", anchor=False)

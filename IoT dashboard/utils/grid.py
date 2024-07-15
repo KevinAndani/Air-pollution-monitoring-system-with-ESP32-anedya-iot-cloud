@@ -5,9 +5,10 @@ import pandas as pd
 
 from utils import charts
 from utils.action_buttons  import operateFan,operateExhaustFan,operateHumidifier,operateHomeVantilater,ButtonText,CurrentData,State
-from utils.global_vars import multiselect, select
 from utils.anedya import anedya_getValue
 
+multiselect = []
+select = []
 
 def date_range() -> pd._libs.tslibs.timestamps.Timestamp:
     Datetime_cols=st.columns(2,gap="medium")
