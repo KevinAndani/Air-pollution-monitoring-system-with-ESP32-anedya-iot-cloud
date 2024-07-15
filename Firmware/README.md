@@ -44,11 +44,11 @@ Open the Arduino IDE and follow these steps to install the necessary libraries:
 Before uploading the code to your board, you need to replace certain variables with your specific details. Open the main sketch file (`.ino` file) and locate the following variables:
 
 > [!caution] 
-> make the `anedya.h` file in the Firmware folder before compiling code
-> `#ifndef ANEDYA_H`
-> `#define ANEDYA_H`
-> `extern const char *deviceID = "Your_deviceID";`
-> `extern const cjhar *connectionkey = "Your_connectionkey";`
+> make the `anedya.h` file in the Firmware folder before compiling code  
+> `#ifndef ANEDYA_H`  
+> `#define ANEDYA_H`  
+> `extern const char *deviceID = "Your_deviceID";`  
+> `extern const cjhar *connectionkey = "Your_connectionkey";`  
 > `#endif`
 
 1. **Wi-Fi SSID**: Replace `WIFI_SSID` with your Wi-Fi network name (SSID) in the `x_wifi.ino` file.
