@@ -11,8 +11,8 @@ import os
 
 # Load environment variables from .env file
 load_dotenv()
-nodeId = os.getenve("NODE_ID")
-apiKey = os.getenve("API_KEY")
+nodeId = os.getenv("NODE_ID")
+apiKey = os.getenv("API_KEY")
 
 def anedya_config(NODE_ID:str, API_KEY:str) -> None :
     nodeId = NODE_ID
