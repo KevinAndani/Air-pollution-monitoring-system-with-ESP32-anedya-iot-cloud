@@ -5,3 +5,4 @@ pytz
 requests
 streamlit-autorefresh
 streamlit-shadcn-ui
+python-dotenv

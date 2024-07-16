@@ -5,23 +5,25 @@ import requests
 import pandas as pd
 import os
 import pytz  # Add this import for time zone conversion
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 import os
 
+from utils.global_vars import nodeId, apiKey
 
 # Load environment variables from .env file
-load_dotenv()
-nodeId = os.getenv("NODE_ID")
-apiKey = os.getenv("API_KEY")
+# load_dotenv()
+# nodeId = os.getenv("NODE_ID")
+# apiKey = os.getenv("API_KEY")
 
 def anedya_config(NODE_ID:str, API_KEY:str) -> None :
+    global nodeId,apiKey
     nodeId = NODE_ID
     apiKey = API_KEY
     return None
 
 
 def anedya_sendCommand(COMMAND_NAME:str, COMMAND_DATA:str):
-
+    global nodeId,apiKey
     url = "https://api.anedya.io/v1/commands/send"
     apiKey_in_formate = "Bearer " + apiKey
 
@@ -41,6 +43,7 @@ def anedya_sendCommand(COMMAND_NAME:str, COMMAND_DATA:str):
     requests.request("POST", url, headers=headers, data=payload)
 
 def anedya_setValue(KEY, VALUE):
+    global nodeId,apiKey
     url = "https://api.anedya.io/v1/valuestore/setValue"
     apiKey_in_formate = "Bearer " + apiKey
 
@@ -65,6 +68,7 @@ def anedya_setValue(KEY, VALUE):
 
 
 def anedya_getValue(KEY):
+    global nodeId,apiKey
     url = "https://api.anedya.io/v1/valuestore/getValue"
     apiKey_in_formate = "Bearer " + apiKey
 
@@ -97,6 +101,7 @@ def anedya_getValue(KEY):
 
 @st.cache_data(ttl=30, show_spinner=False)
 def fetchHumidityData() -> pd.DataFrame:
+    global nodeId,apiKey
     url = "https://api.anedya.io/v1/aggregates/variable/byTime"
     apiKey_in_formate = "Bearer " + apiKey
 
@@ -185,6 +190,7 @@ def fetchHumidityData() -> pd.DataFrame:
 
 @st.cache_data(ttl=30, show_spinner=False)
 def fetchTemperatureData() -> pd.DataFrame:
+    global nodeId,apiKey
     url = "https://api.anedya.io/v1/aggregates/variable/byTime"
     apiKey_in_formate = "Bearer " + apiKey
 
