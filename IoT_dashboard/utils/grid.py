@@ -75,21 +75,21 @@ def singlegrid():
         
         elif select == "Humidity":
             humi=anedya_getValue("humidity")
-            st.metric(label="Humidity",value=str(st.session_state.currentHumidity)+" % 💧")
+            st.metric(label="Humidity",value=str(st.session_state.CurrentHumidity)+" % 💧")
             st.markdown("<b>Control Humidifier:</b>",unsafe_allow_html=True)
             st.button(label=st.session_state.HumidifierButtonText, on_click=operateHumidifier)
             charts.HumidityChart(start_date=start_date,end_date=end_date)
 
         elif select == "Carbon Monoxide":
             co=anedya_getValue("CarbonMonoxide")
-            st.metric(label="Carbon Monoxide",value=str(st.session_state.currentCarbonMonoxide)+" ppm ☁️")
+            st.metric(label="Carbon Monoxide",value=str(st.session_state.CurrentCarbonMonoxide)+" ppm ☁️")
             st.markdown("<b>Control Humidifier:</b>",unsafe_allow_html=True)
             st.button(label=st.session_state.HomeVantilaterButtonText, on_click=operateHomeVantilater)
             charts.TemperatureChart()
 
         elif select == "Carbon Dioxide":
             co2=anedya_getValue("CarbonDioxide")
-            st.metric(label="Carbon Dioxide",value=str(st.session_state.currentCarbonDioxide)+" ppm ☁️")
+            st.metric(label="Carbon Dioxide",value=str(st.session_state.CurrentCarbonDioxide)+" ppm ☁️")
             st.markdown("<b>Control Humidifier:</b>",unsafe_allow_html=True)
             st.button(label=st.session_state.ExhaustFanButtonText, on_click=operateExhaustFan)
             charts.HumidityChart()
