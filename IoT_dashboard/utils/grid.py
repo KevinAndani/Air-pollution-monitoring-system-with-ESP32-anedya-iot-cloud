@@ -10,6 +10,10 @@ from utils.anedya import anedya_getValue
 multiselect = []
 select = []
 
+State()
+ButtonText()
+CurrentData()
+
 def date_range() -> pd._libs.tslibs.timestamps.Timestamp:
     Datetime_cols=st.columns(2,gap="medium")
     with Datetime_cols[0]:
@@ -52,10 +56,6 @@ def date_range() -> pd._libs.tslibs.timestamps.Timestamp:
 
     return start_date,end_date
 
-State()
-ButtonText()
-CurrentData()
-
 def singlegrid():
     global select
     selectbox1=st.columns(4,gap="small")
@@ -68,28 +68,28 @@ def singlegrid():
     with st.container(border=True):
         if select == "Temperature":
             temp=anedya_getValue("temperature")
-            st.metric(label="Temperature",value=str(temp[0])+" °C 🌡️")
+            st.metric(label="Temperature",value=str(st.session_state.CurrentTemperature)+" °C 🌡️")
             st.markdown("<b>Control Fan:</b>",unsafe_allow_html=True)
             st.button(label=st.session_state.FanButtonText, on_click=operateFan)
             charts.TemperatureChart(start_date=start_date,end_date=end_date)
         
         elif select == "Humidity":
             humi=anedya_getValue("humidity")
-            st.metric(label="Humidity",value=str(humi[0])+" % 💧🌡️")
+            st.metric(label="Humidity",value=str(st.session_state.CurrentHumidity)+" % 💧")
             st.markdown("<b>Control Humidifier:</b>",unsafe_allow_html=True)
             st.button(label=st.session_state.HumidifierButtonText, on_click=operateHumidifier)
             charts.HumidityChart(start_date=start_date,end_date=end_date)
 
         elif select == "Carbon Monoxide":
             co=anedya_getValue("CarbonMonoxide")
-            st.metric(label="Carbon Monoxide",value=str(co[0])+" ppm ☁️")
+            st.metric(label="Carbon Monoxide",value=str(st.session_state.CurrentCarbonMonoxide)+" ppm ☁️")
             st.markdown("<b>Control Humidifier:</b>",unsafe_allow_html=True)
             st.button(label=st.session_state.HomeVantilaterButtonText, on_click=operateHomeVantilater)
             charts.TemperatureChart()
 
         elif select == "Carbon Dioxide":
             co2=anedya_getValue("CarbonDioxide")
-            st.metric(label="Carbon Dioxide",value=str(co2[0])+" ppm ☁️")
+            st.metric(label="Carbon Dioxide",value=str(st.session_state.CurrentCarbonDioxide)+" ppm ☁️")
             st.markdown("<b>Control Humidifier:</b>",unsafe_allow_html=True)
             st.button(label=st.session_state.ExhaustFanButtonText, on_click=operateExhaustFan)
             charts.HumidityChart()

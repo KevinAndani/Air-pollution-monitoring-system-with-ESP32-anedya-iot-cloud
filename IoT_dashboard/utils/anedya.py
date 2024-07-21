@@ -168,8 +168,13 @@ def fetchHumidityData() -> pd.DataFrame:
             
              # Load existing data from CSV if it exists
             csv_file = 'humidity_data.csv'
-            if os.path.exists(csv_file):
-                existing_data = pd.read_csv(csv_file, index_col='Datetime', parse_dates=True)
+            if 'humidity_data' not in st.session_state:
+                st.session_state.humidity_data = pd.DataFrame()
+            if 'humidity_data_uploaded' not in st.session_state:
+                st.session_state.humidity_data_uploaded = False
+
+            if st.session_state.humidity_data_uploaded:
+                existing_data = st.session_state.humidity_data
                 st.session_state.humidity_data = pd.concat([existing_data, df]).drop_duplicates().sort_index()
             else:
                 st.session_state.humidity_data = df
@@ -255,8 +260,13 @@ def fetchTemperatureData() -> pd.DataFrame:
             
             # Load existing data from CSV if it exists
             csv_file = 'temperature_data.csv'
-            if os.path.exists(csv_file):
-                existing_data = pd.read_csv(csv_file, index_col='Datetime', parse_dates=True)
+            if 'temperature_data' not in st.session_state:
+                st.session_state.temperature_data = pd.DataFrame()
+            if 'temperature_data_uploaded' not in st.session_state:
+                st.session_state.temperature_data_uploaded = False
+
+            if st.session_state.temperature_data_uploaded:
+                existing_data = st.session_state.temperature_data
                 st.session_state.temperature_data = pd.concat([existing_data, df]).drop_duplicates().sort_index()
             else:
                 st.session_state.temperature_data = df
